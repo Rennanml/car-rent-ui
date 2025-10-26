@@ -17,19 +17,19 @@ export const routes: Routes = [
   // --- Protected Routes ---
   // Costumer Routes
   {
-    path: 'costumers',
+    path: 'customers',
     loadComponent: () => import('./pages/costumer/costumer-list/costumer-list.component')
                        .then(m => m.CostumerListComponent),
                        canActivate: [authGuard]
   },
   {
-    path: 'costumers/new',
+    path: 'customers/new',
     loadComponent: () => import('./pages/costumer/costumer-form/costumer-form.component')
                        .then(m => m.CostumerFormComponent),
                         canActivate: [authGuard]
   },
   {
-    path: 'costumers/edit/:cpf',
+    path: 'customers/edit/:cpf',
     loadComponent: () => import('./pages/costumer/costumer-form/costumer-form.component')
                        .then(m => m.CostumerFormComponent),
                         canActivate: [authGuard]

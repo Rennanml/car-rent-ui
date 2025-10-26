@@ -47,7 +47,7 @@ export class CostumerListComponent implements OnInit {
   }
 
   editCostumer(cpf: string): void {
-    this.router.navigate(['/costumers/edit', cpf]);
+    this.router.navigate(['/customers/edit', cpf]);
   }
   
   deleteCostumer(cpf: string): void {
@@ -63,6 +63,6 @@ export class CostumerListComponent implements OnInit {
   }
 
   addCostumer(): void {
-    this.router.navigate(['/costumers/new']);
+    this.router.navigate(['/customers/new']);
   } 
 }

@@ -58,7 +58,7 @@ export class CostumerFormComponent implements OnInit {
         this.snackBar.open('Erro ao carregar cliente.', 'Fechar', {
           duration: 3000,
         });
-        this.router.navigate(['/costumers']);
+        this.router.navigate(['/customers']);
       },
     });
   }
@@ -69,7 +69,7 @@ export class CostumerFormComponent implements OnInit {
       this.costumerService.updateCostumer(this.costumerCpf!, this.costumer).subscribe({
         next: () => {
           this.snackBar.open('Carro atualizado com sucesso!', 'Fechar', { duration: 3000 });
-          this.router.navigate(['/costumers']);
+          this.router.navigate(['/customers']);
         },
         error: (err) => this.snackBar.open('Erro ao atualizar carro.', 'Fechar', { duration: 3000 })
       });
@@ -77,7 +77,7 @@ export class CostumerFormComponent implements OnInit {
       this.costumerService.createCostumer(this.costumer).subscribe({
         next: () => {
           this.snackBar.open('Carro criado com sucesso!', 'Fechar', { duration: 3000 });
-          this.router.navigate(['/costumers']);
+          this.router.navigate(['/customers']);
         },
         error: (err) => this.snackBar.open('Erro ao criar carro.', 'Fechar', { duration: 3000 })
       });
@@ -86,6 +86,6 @@ export class CostumerFormComponent implements OnInit {
   }
 
   cancel(): void {
-    this.router.navigate(['/costumers']);
+    this.router.navigate(['/customers']);
   }
 }

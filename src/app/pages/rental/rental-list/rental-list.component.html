@@ -1,9 +1,9 @@
 <div class="rental-list-container">
-  <h2>Lista de Aluguéis</h2>
+  <h2>Lista de Alugueis</h2>
 
-  <!-- <button mat-raised-button color="primary" (click)="addRental()">
-    <mat-icon>add</mat-icon> Adicionar Aluguéis
-  </button> -->
+  <button mat-raised-button color="primary" (click)="addRental()">
+    <mat-icon>add</mat-icon> Adicionar Alugueis
+  </button>
 
   <mat-card class="mat-elevation-z4">
     <table mat-table [dataSource]="rentals" class="full-width-table">
@@ -76,7 +76,7 @@
     </table>
 
     <div *ngIf="rentals.length === 0" class="no-rentals-message">
-      Nenhum aluguél encontrado.
+      Nenhum aluguel encontrado.
     </div>
   </mat-card>
 </div>

@@ -1,12 +1,14 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './services/auth/auth.guard';
+import { loggedInGuard } from './services/auth/logged-in.guard';
 
 export const routes: Routes = [
   // Auth Routes
   {
     path: 'login',
     loadComponent: () => import('./pages/auth/login/login.component')
-                       .then(m => m.LoginComponent)
+                       .then(m => m.LoginComponent),
+    canActivate: [loggedInGuard]
   },
   {
     path: 'register',

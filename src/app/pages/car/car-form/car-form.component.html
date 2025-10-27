@@ -2,6 +2,7 @@
   <mat-card>
     <mat-card-header>
       <mat-card-title>{{ isEditMode ? 'Editar Carro' : 'Novo Carro' }}</mat-card-title>
+      <mat-card-subtitle>Preencha as informações do carro</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <form (ngSubmit)="onSubmit()" #carForm="ngForm">

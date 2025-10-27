@@ -1,8 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { CostumerService } from '../../../services/costumer.service';
-import { Costumer } from '../../../model/costumer.model';
+import { CustomerService } from '../../../services/customer.service';
+import { Customer } from '../../../model/customer.model';
 
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
@@ -12,7 +12,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
-  selector: 'app-costumer-list',
+  selector: 'app-customer-list',
   standalone: true,
   imports: [
     CommonModule,
@@ -22,47 +22,47 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatCardModule,
     MatTooltipModule
   ],
-  templateUrl: './costumer-list.component.html',
-  styleUrls: ['./costumer-list.component.css']
+  templateUrl: './customer-list.component.html',
+  styleUrls: ['./customer-list.component.css']
 })
 
-export class CostumerListComponent implements OnInit {
-  costumers: Costumer[] = [];
+export class CustomerListComponent implements OnInit {
+  customers: Customer[] = [];
 
   displayedColumns: string[] = ['name', 'cpf', 'actions'];
 
-  private costumerService = inject(CostumerService);
+  private customerService = inject(CustomerService);
   private router = inject(Router) ;   
   private snackBar = inject(MatSnackBar);
 
   ngOnInit(): void {
-    this.loadCostumers();
+    this.loadCustomers();
   } 
 
-  loadCostumers(): void {
-    this.costumerService.getCostumers().subscribe({
-      next: (data) => this.costumers = data,
+  loadCustomers(): void {
+    this.customerService.getCustomers().subscribe({
+      next: (data) => this.customers = data,
       error: (err) => this.snackBar.open('Erro ao carregar clientes.', 'Fechar', { duration: 3000 })
     });
   }
 
-  editCostumer(cpf: string): void {
+  editCustomer(cpf: string): void {
     this.router.navigate(['/customers/edit', cpf]);
   }
   
-  deleteCostumer(cpf: string): void {
+  deleteCustomer(cpf: string): void {
     if (confirm('Tem certeza que deseja excluir este cliente?')) {
-      this.costumerService.deleteCostumer(cpf).subscribe({
+      this.customerService.deleteCustomer(cpf).subscribe({
         next: () => {
           this.snackBar.open('Cliente excluído com sucesso!', 'Fechar', { duration: 3000 });
-          this.loadCostumers();
+          this.loadCustomers();
         },
         error: (err) => this.snackBar.open('Erro ao excluir cliente.', 'Fechar', { duration: 3000 })
       });
     }   
   }
 
-  addCostumer(): void {
+  addCustomer(): void {
     this.router.navigate(['/customers/new']);
   } 
 }

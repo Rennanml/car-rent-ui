@@ -1,8 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { CostumerService } from '../../../services/costumer.service';
-import { Costumer } from '../../../model/costumer.model';
+import { CustomerService } from '../../../services/customer.service';
+import { Customer as Customer } from '../../../model/customer.model';
 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -12,7 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 
 @Component({
-  selector: 'app-costumer-form',
+  selector: 'app-customer-form',
   standalone: true,
   imports: [
     CommonModule,
@@ -22,18 +22,18 @@ import { MatCardModule } from '@angular/material/card';
     MatButtonModule,
     MatCardModule,
   ],
-  templateUrl: './costumer-form.component.html',
-  styleUrls: ['./costumer-form.component.css'],
+  templateUrl: './customer-form.component.html',
+  styleUrls: ['./customer-form.component.css'],
 })
-export class CostumerFormComponent implements OnInit {
-  costumer: Costumer = {
+export class CustomerFormComponent implements OnInit {
+  customer: Customer = {
     cpf: '',
     name: '',
   };
   isEditMode: boolean = false;
-  private costumerCpf: string | null = null;
+  private customerCpf: string | null = null;
 
-  private costumerService = inject(CostumerService);
+  private customerService = inject(CustomerService);
   private router = inject(Router);
   private activatedRoute = inject(ActivatedRoute);
   private snackBar = inject(MatSnackBar);
@@ -42,17 +42,17 @@ export class CostumerFormComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe((params) => {
       const cpfParam = params.get('cpf');
       if (cpfParam) {
-        this.costumerCpf = cpfParam;
+        this.customerCpf = cpfParam;
         this.isEditMode = true;
-        this.loadCostumer(this.costumerCpf);
+        this.loadCustomer(this.customerCpf);
       }
     });
   }
 
-  loadCostumer(cpf: string): void {
-    this.costumerService.getCostumerByCpf(cpf).subscribe({
+  loadCustomer(cpf: string): void {
+    this.customerService.getCustomerByCpf(cpf).subscribe({
       next: (data) => {
-        this.costumer = data;
+        this.customer = data;
       },
       error: (err) => {
         this.snackBar.open('Erro ao carregar cliente.', 'Fechar', {
@@ -66,7 +66,7 @@ export class CostumerFormComponent implements OnInit {
   onSubmit(): void {
     {
     if (this.isEditMode) {
-      this.costumerService.updateCostumer(this.costumerCpf!, this.costumer).subscribe({
+      this.customerService.updateCustomer(this.customerCpf!, this.customer).subscribe({
         next: () => {
           this.snackBar.open('Carro atualizado com sucesso!', 'Fechar', { duration: 3000 });
           this.router.navigate(['/customers']);
@@ -74,7 +74,7 @@ export class CostumerFormComponent implements OnInit {
         error: (err) => this.snackBar.open('Erro ao atualizar carro.', 'Fechar', { duration: 3000 })
       });
     } else {
-      this.costumerService.createCostumer(this.costumer).subscribe({
+      this.customerService.createCustomer(this.customer).subscribe({
         next: () => {
           this.snackBar.open('Carro criado com sucesso!', 'Fechar', { duration: 3000 });
           this.router.navigate(['/customers']);

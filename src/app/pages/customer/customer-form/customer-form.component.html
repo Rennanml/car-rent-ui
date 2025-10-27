@@ -1,31 +1,31 @@
-<div class="costumer-form-container">
+<div class="customer-form-container">
   <mat-card>
     <mat-card-header>
       <mat-card-title>{{ isEditMode ? 'Editar Cliente' : 'Novo Cliente' }}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <form (ngSubmit)="onSubmit()" #costumerForm="ngForm">
+      <form (ngSubmit)="onSubmit()" #customerForm="ngForm">
 
         <mat-form-field appearance="outline" class="full-width-input">
           <mat-label>Nome</mat-label>
-          <input matInput [(ngModel)]="costumer.name" name="name" required>
-          <mat-error *ngIf="costumerForm.controls['name']?.invalid && costumerForm.controls['name']?.touched">
+          <input matInput [(ngModel)]="customer.name" name="name" required>
+          <mat-error *ngIf="customerForm.controls['name']?.invalid && customerForm.controls['name']?.touched">
             Nome é obrigatório.
           </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="full-width-input">
           <mat-label>CPF</mat-label>
-          <input matInput [(ngModel)]="costumer.cpf" name="cpf" required minlength="11" maxlength="11"
+          <input matInput [(ngModel)]="customer.cpf" name="cpf" required minlength="11" maxlength="11"
             [disabled]="isEditMode">
-          <mat-error *ngIf="costumerForm.controls['cpf']?.invalid && costumerForm.controls['cpf']?.touched">
+          <mat-error *ngIf="customerForm.controls['cpf']?.invalid && customerForm.controls['cpf']?.touched">
             CPF é obrigatório (11 caracteres).
           </mat-error>
         </mat-form-field>
 
         <mat-card-actions align="end">
           <button mat-button type="button" (click)="cancel()">Cancelar</button> <button mat-raised-button
-            color="primary" type="submit" [disabled]="!costumerForm.form.valid">
+            color="primary" type="submit" [disabled]="!customerForm.form.valid">
             {{ isEditMode ? 'Salvar Alterações' : 'Criar Cliente' }}
           </button>
         </mat-card-actions>

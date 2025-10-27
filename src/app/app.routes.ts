@@ -15,23 +15,23 @@ export const routes: Routes = [
   },
 
   // --- Protected Routes ---
-  // Costumer Routes
+  // Customer Routes
   {
     path: 'customers',
-    loadComponent: () => import('./pages/costumer/costumer-list/costumer-list.component')
-                       .then(m => m.CostumerListComponent),
+    loadComponent: () => import('./pages/customer/customer-list/customer-list.component')
+                       .then(m => m.CustomerListComponent),
                        canActivate: [authGuard]
   },
   {
     path: 'customers/new',
-    loadComponent: () => import('./pages/costumer/costumer-form/costumer-form.component')
-                       .then(m => m.CostumerFormComponent),
+    loadComponent: () => import('./pages/customer/customer-form/customer-form.component')
+                       .then(m => m.CustomerFormComponent),
                         canActivate: [authGuard]
   },
   {
     path: 'customers/edit/:cpf',
-    loadComponent: () => import('./pages/costumer/costumer-form/costumer-form.component')
-                       .then(m => m.CostumerFormComponent),
+    loadComponent: () => import('./pages/customer/customer-form/customer-form.component')
+                       .then(m => m.CustomerFormComponent),
                         canActivate: [authGuard]
   },
 

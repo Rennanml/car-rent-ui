@@ -13,6 +13,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 @Component({
   selector: 'app-rental-form',
@@ -25,7 +26,11 @@ import { MatCardModule } from '@angular/material/card';
     MatCheckboxModule,
     MatCardModule,
     MatDatepickerModule,
-    MatNativeDateModule],
+    MatNativeDateModule,
+    NgxMaskDirective],
+  providers: [
+    provideNgxMask()
+  ],
   templateUrl: './rental-form.component.html',
   styleUrl: './rental-form.component.css'
 })
@@ -44,15 +49,18 @@ export class RentalFormComponent {
   private snackBar = inject(MatSnackBar);
   public minStartDate: Date = new Date();
 
-  onSubmit(): void {{
-      this.rentalService.createRental(this.createRentalRequest).subscribe({
-        next: () => {
-          this.snackBar.open('Aluguel criado com sucesso!', 'Fechar', { duration: 3000 });
-          this.router.navigate(['/rentals']);
-        },
-        error: (err) => this.snackBar.open('Erro ao criar aluguel.', 'Fechar', { duration: 3000 })
-      });
+  onSubmit(): void {
+    const cleanRequest: CreateRentalRequest = { ...this.createRentalRequest };
+    if (cleanRequest.cpf) {
+      cleanRequest.cpf = cleanRequest.cpf.replace(/\D/g, ''); 
     }
+    this.rentalService.createRental(cleanRequest).subscribe({
+      next: () => {
+        this.snackBar.open('Aluguel criado com sucesso!', 'Fechar', { duration: 3000 });
+        this.router.navigate(['/rentals']);
+      },
+      error: (err: any) => this.snackBar.open('Erro ao criar aluguel. Verifique os dados.', 'Fechar', { duration: 3000 })
+    });
   }
 
   cancel(): void {

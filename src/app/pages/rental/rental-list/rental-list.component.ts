@@ -61,7 +61,7 @@ export class RentalListComponent implements OnInit {
   }
 
   addRental(): void {
-    this.router.navigate(['/rental/new']);
+    this.router.navigate(['/rentals/new']);
   }
 
 }

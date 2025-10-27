@@ -1,1 +1,79 @@
-<p>rental-form works!</p>
+<div class="rental-form-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Novo Aluguel</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form (ngSubmit)="onSubmit()" #createRentalRequestForm="ngForm">
+        
+        <mat-form-field appearance="outline" class="full-width-input">
+          <mat-label>Placa</mat-label>
+          <input matInput [(ngModel)]="createRentalRequest.licensePlate" name="licensePlate" required minlength="7" maxlength="7">
+          <mat-error *ngIf="createRentalRequestForm.controls['licensePlate']?.invalid && createRentalRequestForm.controls['licensePlate']?.touched">
+            Placa é obrigatória (7 caracteres).
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width-input">
+          <mat-label>CPF</mat-label>
+          <input matInput [(ngModel)]="createRentalRequest.cpf" name="cpf" required minlength="11" maxlength="11">
+          <mat-error *ngIf="createRentalRequestForm.controls['cpf']?.invalid && createRentalRequestForm.controls['cpf']?.touched">
+            CPF é obrigatório (11 caracteres).
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width-input">
+          <mat-label>Data de Retirada</mat-label>
+          <input matInput 
+                 [matDatepicker]="startPicker" 
+                 placeholder="DD/MM/AAAA" 
+                 [(ngModel)]="createRentalRequest.startDate" 
+                 name="startDate" 
+                 required 
+                 #startDate="ngModel">
+          <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+          <mat-datepicker #startPicker></mat-datepicker>
+          <mat-error *ngIf="startDate.invalid && startDate.touched">
+              <span *ngIf="startDate.errors?.['required']">A data de retirada é obrigatória.</span>
+              <span *ngIf="startDate.errors?.['matDatepickerParse'] || startDate.errors?.['matDatepickerInvalid']">
+                  Formato de data inválido ou data impossível.
+              </span>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width-input">
+            <mat-label>Data de Devolução</mat-label>
+            <input matInput 
+                [matDatepicker]="endPicker" 
+                placeholder="DD/MM/AAAA" 
+                [(ngModel)]="createRentalRequest.endDate" 
+                name="endDate" 
+                required 
+                #endDate="ngModel">
+            <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+            <mat-datepicker #endPicker></mat-datepicker>
+            
+            <mat-error *ngIf="endDate.invalid && endDate.touched">
+                <span *ngIf="endDate.errors?.['required']">A data de devolução é obrigatória.</span>
+                <span *ngIf="endDate.errors?.['matDatepickerParse'] || endDate.errors?.['matDatepickerInvalid']">
+                    Formato de data inválido ou data impossível.
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-checkbox class="insurance-checkbox" 
+                    [(ngModel)]="createRentalRequest.withInsurance" 
+                    name="withInsurance">
+            Incluir Seguro Total
+        </mat-checkbox>
+
+        <mat-card-actions align="end">
+          <button mat-button type="button" (click)="cancel()">Cancelar</button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="!createRentalRequestForm.form.valid">
+            Criar Aluguel
+          </button>
+        </mat-card-actions>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

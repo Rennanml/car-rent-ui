@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Rental } from '../model/rental.model';
+import { CreateRentalRequest } from '../model/create.rental.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +20,8 @@ export class RentalService {
     return this.http.get<Rental>(`${this.API_URL}/${id}`);
   }
 
-  createRental(rental: Rental): Observable<Rental> {
-    return this.http.post<Rental>(this.API_URL, rental);
+  createRental(rental: CreateRentalRequest): Observable<CreateRentalRequest> {
+    return this.http.post<CreateRentalRequest>(this.API_URL, rental);
   }
 
   updateRental(id: number, rental: Rental): Observable<Rental> {

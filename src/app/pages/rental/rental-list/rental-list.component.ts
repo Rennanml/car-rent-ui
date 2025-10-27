@@ -33,6 +33,17 @@ export class RentalListComponent implements OnInit {
   private router = inject(Router);
   private snackBar = inject(MatSnackBar);
 
+  getFriendlyStatus(status: 'ACTIVE' | 'FINISHED' | 'CANCELED'): string {
+    switch (status) {
+      case 'ACTIVE':
+        return 'Ativo';
+      case 'FINISHED':
+        return 'Finalizado';
+      case 'CANCELED':
+        return 'Cancelado';
+    }
+  }
+
   ngOnInit(): void {
     this.loadRentals();
   }

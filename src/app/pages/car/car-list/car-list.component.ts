@@ -11,6 +11,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../../../components/confirmation-dialog/confirmation-dialog.component';
+
 @Component({
   selector: 'app-car-list',
   standalone: true,
@@ -20,7 +23,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatButtonModule,
     MatIconModule,
     MatCardModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDialogModule
   ],
   templateUrl: './car-list.component.html',
   styleUrls: ['./car-list.component.css']
@@ -33,6 +37,7 @@ export class CarListComponent implements OnInit {
   private carService = inject(CarService);
   private router = inject(Router);
   private snackBar = inject(MatSnackBar);
+  private dialog = inject(MatDialog);
 
   ngOnInit(): void {
     this.loadCars();
@@ -50,15 +55,25 @@ export class CarListComponent implements OnInit {
   }
 
   deleteCar(licensePlate: string): void {
-    if (confirm('Tem certeza que deseja excluir este carro?')) {
-      this.carService.deleteCar(licensePlate).subscribe({
-        next: () => {
-          this.snackBar.open('Carro excluído com sucesso!', 'Fechar', { duration: 3000 });
-          this.loadCars();
-        },
-        error: (err) => this.snackBar.open('Erro ao excluir carro.', 'Fechar', { duration: 3000 })
-      });
-    }
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '400px',
+      data: { 
+        title: 'Confirmar Exclusão', 
+        message: `Tem certeza que deseja excluir o carro com placa ${licensePlate}?` 
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.carService.deleteCar(licensePlate).subscribe({
+          next: () => {
+            this.snackBar.open('Carro excluído com sucesso!', 'Fechar', { duration: 3000 });
+            this.loadCars();
+          },
+          error: (err) => this.snackBar.open('Erro ao excluir carro.', 'Fechar', { duration: 3000 })
+        });
+      }
+    });
   }
 
   addCar(): void {

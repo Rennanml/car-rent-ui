@@ -1,15 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
+import { AuthService } from './services/auth/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
   imports: [
+    CommonModule, 
     RouterOutlet,
-  HeaderComponent],
+    HeaderComponent 
+  ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'car-rent-ui';
+  private authService = inject(AuthService);
+  isLoggedIn$: Observable<boolean> = this.authService.userLoggedIn$;
 }

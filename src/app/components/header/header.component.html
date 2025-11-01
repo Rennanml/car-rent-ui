@@ -4,32 +4,28 @@
     <a routerLink="/rentals">Car Rent</a> 
   </div>
 
-  <ul class="nav-links">
-    <li>
+  <ul class="nav-links" *ngIf="isLoggedIn$ | async">
+    <li *ngFor="let link of links">
       <a 
-        routerLink="/cars" 
+        [routerLink]="link.path" 
         routerLinkActive="active-link"
       >
-        Carros
+        {{ link.label }}
       </a>
     </li>
-
     <li>
-      <a 
-        routerLink="/rentals" 
-        routerLinkActive="active-link"
-      >
-        Aluguéis
-      </a>
-    </li>
-
-    <li>
-      <a 
-        routerLink="/customers" 
-        routerLinkActive="active-link"
-      >
-        Clientes
+      <a (click)="onLogout()" class="logout-link">
+        Sair
       </a>
     </li>
   </ul>
+
+  <ul class="nav-links" *ngIf="!(isLoggedIn$ | async)">
+    <li>
+      <a routerLink="/login" routerLinkActive="active-link">
+        Login
+      </a>
+    </li>
+  </ul>
+
 </nav>

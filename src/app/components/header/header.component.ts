@@ -12,6 +12,6 @@ export class HeaderComponent {
   links = [
     { path: '/cars', label: 'Carros' },
     { path: '/rentals', label: 'Aluguéis' },
-    { path: '/costumers', label: 'Clientes' }
+    { path: '/customers', label: 'Clientes' }
   ];
 }

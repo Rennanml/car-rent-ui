@@ -31,6 +31,7 @@
   padding: 8px 12px;
   border-radius: 4px;
   transition: background-color 0.3s;
+  cursor: pointer;
 }
 
 .nav-links a:hover {
@@ -40,4 +41,8 @@
 .active-link {
   background-color: #007bff;
   font-weight: bold;
+}
+
+.logout-link:hover {
+  background-color: #c82333;
 }

@@ -4,7 +4,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { RentalService } from '../../../services/rental.service';
 import { CreateRentalRequest } from '../../../model/create.rental.model';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { CommonModule } from '@angular/common';
@@ -15,8 +14,25 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
+import { MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import 'moment/locale/pt-br';
+
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'DD/MM/YYYY',
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MMMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
+
 @Component({
   selector: 'app-rental-form',
+  standalone: true,
   imports: [
     CommonModule,
     FormsModule,
@@ -26,10 +42,19 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
     MatCheckboxModule,
     MatCardModule,
     MatDatepickerModule,
-    MatNativeDateModule,
-    NgxMaskDirective],
+    MatMomentDateModule,
+    NgxMaskDirective
+  ],
   providers: [
-    provideNgxMask()
+    provideNgxMask(),
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+    },
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
+    { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: false } }
   ],
   templateUrl: './rental-form.component.html',
   styleUrl: './rental-form.component.css'

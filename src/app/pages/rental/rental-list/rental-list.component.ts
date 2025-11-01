@@ -11,27 +11,44 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../../../components/confirmation-dialog/confirmation-dialog.component';
+
 @Component({
   selector: 'app-rental-list',
+  standalone: true,
   imports: [
     CommonModule,
     MatTableModule,
     MatButtonModule,
     MatIconModule,
     MatCardModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDialogModule
   ],
   templateUrl: './rental-list.component.html',
-  styleUrl: './rental-list.component.css'
+  styleUrls: ['./rental-list.component.css']
 })
 export class RentalListComponent implements OnInit {
   rentals: Rental[] = [];
   
-  displayedColumns: string[] = ['id' , 'costumer', 'car', 'startDate', 'endDate', 'totalPrice', 'status', 'actualReturnDate', 'finalPrice'];
+  displayedColumns: string[] = [
+    'id' , 
+    'costumer', 
+    'car', 
+    'startDate', 
+    'endDate', 
+    'totalPrice', 
+    'status', 
+    'actualReturnDate', 
+    'finalPrice', 
+    'actions'
+  ];
 
   private rentalService = inject(RentalService);
   private router = inject(Router);
   private snackBar = inject(MatSnackBar);
+  private dialog = inject(MatDialog);
 
   getFriendlyStatus(status: 'ACTIVE' | 'FINISHED' | 'CANCELED'): string {
     switch (status) {
@@ -60,15 +77,25 @@ export class RentalListComponent implements OnInit {
   }
 
   deleteRental(id: number): void {
-    if (confirm('Tem certeza que deseja excluir este aluguel?')) {
-      this.rentalService.deleteRental(id).subscribe({
-        next: () => {
-          this.snackBar.open('Aluguel excluído com sucesso!', 'Fechar', { duration: 3000 });
-          this.loadRentals();
-        },
-        error: (err) => this.snackBar.open('Erro ao excluir aluguel.', 'Fechar', { duration: 3000 })
-      });
-    }
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '500px',
+      data: { 
+        title: 'Confirmar Exclusão', 
+        message: `Tem certeza que deseja excluir o aluguel nº ${id}?` 
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.rentalService.deleteRental(id).subscribe({
+          next: () => {
+            this.snackBar.open('Aluguel excluído com sucesso!', 'Fechar', { duration: 3000 });
+            this.loadRentals();
+          },
+          error: (err) => this.snackBar.open('Erro ao excluir aluguel.', 'Fechar', { duration: 3000 })
+        });
+      }
+    });
   }
 
   addRental(): void {

@@ -11,6 +11,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../../../components/confirmation-dialog/confirmation-dialog.component';
+
 @Component({
   selector: 'app-customer-list',
   standalone: true,
@@ -20,7 +23,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatButtonModule,
     MatIconModule,
     MatCardModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDialogModule
   ],
   templateUrl: './customer-list.component.html',
   styleUrls: ['./customer-list.component.css']
@@ -34,6 +38,7 @@ export class CustomerListComponent implements OnInit {
   private customerService = inject(CustomerService);
   private router = inject(Router) ;   
   private snackBar = inject(MatSnackBar);
+  private dialog = inject(MatDialog);
 
   ngOnInit(): void {
     this.loadCustomers();
@@ -51,15 +56,25 @@ export class CustomerListComponent implements OnInit {
   }
   
   deleteCustomer(cpf: string): void {
-    if (confirm('Tem certeza que deseja excluir este cliente?')) {
-      this.customerService.deleteCustomer(cpf).subscribe({
-        next: () => {
-          this.snackBar.open('Cliente excluído com sucesso!', 'Fechar', { duration: 3000 });
-          this.loadCustomers();
-        },
-        error: (err) => this.snackBar.open('Erro ao excluir cliente.', 'Fechar', { duration: 3000 })
-      });
-    }   
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '400px',
+      data: { 
+        title: 'Confirmar Exclusão', 
+        message: `Tem certeza que deseja excluir o cliente com CPF: ${cpf}?` 
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.customerService.deleteCustomer(cpf).subscribe({
+          next: () => {
+            this.snackBar.open('Cliente excluído com sucesso!', 'Fechar', { duration: 3000 });
+            this.loadCustomers();
+          },
+          error: (err) => this.snackBar.open('Erro ao excluir cliente.', 'Fechar', { duration: 3000 })
+        });
+      }
+    });
   }
 
   addCustomer(): void {

@@ -1,6 +1,6 @@
 export interface Return {
   rentalId: number,
-  actualReturnDate: Date,
+  actualReturnDate: string,
   needsMaintenance: boolean,
   needsCleaning: boolean
 }

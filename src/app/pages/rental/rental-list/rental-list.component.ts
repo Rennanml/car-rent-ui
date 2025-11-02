@@ -2,7 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RentalService } from '../../../services/rental.service';
-import { Rental, CostumerRental, CarRental, PeriodRental } from '../../../model/rental.model';
+import { Rental } from '../../../model/rental.model';
 
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';

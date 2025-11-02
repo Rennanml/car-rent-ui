@@ -106,3 +106,9 @@ mat-icon {
     font-size: 0.9rem;
   }
 }
+
+.disabled-button {
+  filter: grayscale(100%);
+  opacity: 0.6;
+  pointer-events: none;
+}

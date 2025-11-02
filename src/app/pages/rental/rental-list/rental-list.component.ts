@@ -72,10 +72,6 @@ export class RentalListComponent implements OnInit {
     });
   }
 
-  editRental(id: number): void {
-    this.router.navigate(['/rental/edit', id]);
-  }
-
   deleteRental(id: number): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       width: '500px',
@@ -100,6 +96,10 @@ export class RentalListComponent implements OnInit {
 
   addRental(): void {
     this.router.navigate(['/rentals/new']);
+  }
+
+  returnRental(id: number): void {
+    this.router.navigate(['/rentals/return', id]);
   }
 
 }

@@ -1,0 +1,78 @@
+.rental-return-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding: 32px 16px;
+}
+
+.rental-return-form-container mat-card {
+  width: 100%;
+  max-width: 480px;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+mat-card-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+mat-card-title {
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+mat-card-subtitle {
+  font-size: 0.9rem;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.full-width-input {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  padding-top: 24px;
+}
+
+button[mat-raised-button],
+button[mat-button] {
+  min-width: 150px;
+  height: 44px;
+  border-radius: 8px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+button[mat-raised-button] {
+  transition: background-color 0.25s ease, transform 0.15s ease;
+}
+
+button[mat-raised-button]:hover {
+  transform: translateY(-1px);
+}
+
+.return-checkbox {
+  margin: 12px 0 8px 0;
+  display: block;
+}
+
+input[disabled] {
+  background-color: #eeeeee !important;
+  color: #757575 !important;
+  cursor: not-allowed;
+}

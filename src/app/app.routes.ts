@@ -70,7 +70,12 @@ export const routes: Routes = [
                        .then(m => m.RentalFormComponent),
                         canActivate: [authGuard]
   },
-  
+  {
+    path: 'rentals/return/:rentalId',
+    loadComponent: () => import('./pages/rental/rental-return/rental-return.component')
+                       .then(m => m.RentalReturnComponent),
+                        canActivate: [authGuard]
+  },
   { path: '', redirectTo: '/rentals', pathMatch: 'full' },
   { path: '**', redirectTo: '/login' }
 ];

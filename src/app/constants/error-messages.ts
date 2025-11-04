@@ -13,3 +13,11 @@ export const ERROR_MESSAGES_MAP: { [key: string]: string } = {
   '409': 'Houve um conflito de dados. O item que você está tentando criar já existe.',
   '500': 'Houve um erro interno no servidor. Por favor, tente novamente ou entre em contato com o suporte.',
 };
+
+export const ERRORS_WITHOUT_DYNAMIC_VALUE: string[] = [
+  'A car with this license plate already exists.',
+  'A customer with this CPF already exists.',
+  'Invalid rental period: End date must be after start date.',
+  'Invalid rental period: The interval cannot be longer than 60 days.',
+  'The return date cannot be earlier than the rental start date.',
+];

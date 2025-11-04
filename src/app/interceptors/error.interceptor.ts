@@ -4,7 +4,7 @@ import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { ErrorNotificationService } from '../services/error-notification.service';
-import { ERROR_MESSAGES_MAP } from '../constants/error-messages';
+import { ERROR_MESSAGES_MAP, ERRORS_WITHOUT_DYNAMIC_VALUE } from '../constants/error-messages';
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   const errorNotificationService = inject(ErrorNotificationService); 
@@ -21,13 +21,18 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
           if (backendMessage.includes(key)) {
             friendlyMessage = ERROR_MESSAGES_MAP[key];
             mapped = true;
+
+            const shouldAppendValue = !ERRORS_WITHOUT_DYNAMIC_VALUE.includes(key);
             
-            const match = backendMessage.match(/:\s*([^:]+)$/);
-            if (match && match[1]) {
-                friendlyMessage = `${friendlyMessage} (Valor inválido: ${match[1]})`;
-            } else {
-                 friendlyMessage = `${friendlyMessage}`;
+            if (shouldAppendValue) {
+                const match = backendMessage.match(/:\s*([^:]+)$/);
+                
+                if (match && match[1]) {
+                    friendlyMessage = `${friendlyMessage} (Valor inválido: ${match[1]})`;
+                }
             }
+            
+            friendlyMessage = `${friendlyMessage}`;
             break; 
           }
         }

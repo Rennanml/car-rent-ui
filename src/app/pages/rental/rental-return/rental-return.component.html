@@ -1,0 +1,52 @@
+<div class="rental-return-form-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Devolução do Aluguel #{{ rentalId }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form (ngSubmit)="onSubmit(returnForm)" #returnForm="ngForm">
+        
+        <mat-form-field appearance="outline" class="full-width-input">
+          <mat-label>Data da Devolução Real</mat-label>
+          <input 
+            matInput 
+            [matDatepicker]="returnPicker" 
+            placeholder="DD/MM/AAAA" 
+            [(ngModel)]="returnModel.actualReturnDate" 
+            name="actualReturnDate" 
+            required 
+            #actualReturnDate="ngModel"
+          >
+          <mat-datepicker-toggle matSuffix [for]="returnPicker"></mat-datepicker-toggle>
+          <mat-datepicker #returnPicker></mat-datepicker>
+          <mat-error *ngIf="actualReturnDate.invalid && actualReturnDate.touched">
+            <span *ngIf="actualReturnDate.errors?.['required']">A data de devolução é obrigatória.</span>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-checkbox class="return-checkbox" 
+                      [(ngModel)]="returnModel.needsMaintenance" 
+                      name="needsMaintenance">
+            O veículo necessita de manutenção (ex: danos)?
+        </mat-checkbox>
+        
+        <mat-checkbox class="return-checkbox" 
+                      [(ngModel)]="returnModel.needsCleaning" 
+                      name="needsCleaning">
+            O veículo necessita de limpeza profunda?
+        </mat-checkbox>
+
+        <mat-card-actions align="end">
+          <button mat-button type="button" (click)="cancel()">Cancelar</button>
+          <button 
+            mat-raised-button 
+            color="primary" 
+            type="submit" 
+            [disabled]="!returnForm.form.valid || !returnModel.actualReturnDate">
+            Registrar Devolução
+          </button>
+        </mat-card-actions>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

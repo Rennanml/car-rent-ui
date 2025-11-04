@@ -1,0 +1,31 @@
+<nav class="navbar">
+  
+  <div class="logo">
+    <a routerLink="/rentals">Car Rent</a> 
+  </div>
+
+  <ul class="nav-links" *ngIf="isLoggedIn$ | async">
+    <li *ngFor="let link of links">
+      <a 
+        [routerLink]="link.path" 
+        routerLinkActive="active-link"
+      >
+        {{ link.label }}
+      </a>
+    </li>
+    <li>
+      <a (click)="onLogout()" class="logout-link">
+        Sair
+      </a>
+    </li>
+  </ul>
+
+  <ul class="nav-links" *ngIf="!(isLoggedIn$ | async)">
+    <li>
+      <a routerLink="/login" routerLinkActive="active-link">
+        Login
+      </a>
+    </li>
+  </ul>
+
+</nav>

@@ -1,59 +1,105 @@
-# CarRentUi
+# Car Rent
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.12.
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-F2F4F9?style=for-the-badge&logo=spring-boot)
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
+![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)
 
-## Development server
+## 📖 Sobre
 
-To start a local development server, run:
+Uma breve descrição do que esta API faz, qual problema ela resolve e seu principal objetivo. Este é o back-end do projeto Car Rent, que consome esta API através de uma aplicação front-end em Angular.
 
-```bash
-ng serve
-```
+---
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 🛠️ Tecnologias Utilizadas
 
-## Code scaffolding
+Liste as principais tecnologias, frameworks e bancos de dados que você usou no **back-end**:
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+* **Java 21**
+* **Spring Boot 3.4.3**
+* **Maven** 
+* **SQLite**
+* **Spring Security / JWT**
+* **JPA / Hibernate**
 
-```bash
-ng generate component component-name
-```
+---
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 🏁 Pré-requisitos
 
-```bash
-ng generate --help
-```
+Antes de começar, você precisará ter as seguintes ferramentas instaladas em sua máquina:
 
-## Building
+* [Java JDK](https://www.oracle.com/java/technologies/downloads/) `[versão 21]`.
+* [Maven](https://maven.apache.org/download.cgi).
+* [Git](https://git-scm.com/downloads).
+* (Para o front-end) [Node.js](https://nodejs.org/en/) e [Angular CLI](https://angular.io/cli).
 
-To build the project run:
+---
 
-```bash
-ng build
-```
+## 🚀 Rodando a API (Back-end)
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Siga os passos abaixo para executar o back-end localmente:
 
-## Running unit tests
+1. **Clone este repositório:**
+    ```bash
+    git clone https://github.com/Rennanml/car-rent.git
+    cd car-rent
+    ```
+    
+2. **Instale as dependências (se usar Maven):**
+    ```bash
+    mvn clean install
+    ```
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+3. **Execute a aplicação (se usar Maven):**
+    ```bash
+    mvn spring-boot:run
+    ```
 
-```bash
-ng test
-```
+> A API estará disponível em `http://localhost:8080`
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+## 🖥️ Rodando a Aplicação (Front-end)
 
-```bash
-ng e2e
-```
+O front-end desta aplicação foi desenvolvido em Angular e está em um **repositório separado**. Siga os passos abaixo para executá-lo:
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+1.  **Clone o repositório do front-end:**
+    ```bash
+    git clone https://github.com/Rennanml/car-rent-ui.git
+    ```
 
-## Additional Resources
+2.  **Acesse a pasta do projeto:**
+    ```bash
+    cd car-rent-ui
+    ```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+3.  **Instale as dependências do Node.js:**
+    ```bash
+    npm install
+    ```
+
+4.  **Execute a aplicação Angular:**
+    ```bash
+    ng serve
+    ```
+    ou
+    ```bash
+    npm run start
+    ```    
+
+
+> A aplicação front-end estará disponível em `http://localhost:4200/` e fará as requisições para a API back-end (que deve estar rodando em `http://localhost:8080`).
+
+
+## 🧑‍💻 Autores
+
+**Abel Baes Correia**
+
+* [GitHub](https://github.com/abelBaes)
+
+**Felipe Marins Vilela**
+
+* [GitHub](https://github.com/Felipe-Vilela)
+
+**Rennan Marcile Lazarini**
+
+* [GitHub](https://github.com/Rennanml)

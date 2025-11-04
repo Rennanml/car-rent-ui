@@ -1,0 +1,44 @@
+<div class="customer-form-container">
+  <mat-card class="customer-card">
+    <mat-card-header>
+      <mat-card-title>{{ isEditMode ? 'Editar Cliente' : 'Novo Cliente' }}</mat-card-title>
+      <mat-card-subtitle>Preencha as informações do cliente</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form (ngSubmit)="onSubmit()" #customerForm="ngForm">
+        <mat-form-field appearance="outline" class="full-width-input">
+          <mat-label>Nome</mat-label>
+          <input matInput [(ngModel)]="customer.name" name="name" required />
+          <mat-error *ngIf="customerForm.controls['name']?.invalid && customerForm.controls['name']?.touched">
+            Nome é obrigatório.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width-input">
+          <mat-label>CPF</mat-label>
+          <input matInput [(ngModel)]="customer.cpf" name="cpf" required minlength="14" maxlength="14"
+            mask="000.000.000-00" [disabled]="isEditMode" [dropSpecialCharacters]="false" #customerForm="ngModel" />
+          <mat-error *ngIf="customerForm.controls['cpf']?.invalid && customerForm.controls['cpf']?.touched">
+            <span *ngIf="customerForm.errors?.['required']">O CPF é obrigatório.</span>
+            <span *ngIf="customerForm.errors?.['minlength']">
+              O CPF deve ser preenchido por completo (14 caracteres com máscara).
+              </span>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-card-actions align="end">
+          <button mat-stroked-button type="button" color="accent" (click)="cancel()">
+            <mat-icon>arrow_back</mat-icon>
+            Cancelar
+          </button>
+
+          <button mat-flat-button color="primary" type="submit" [disabled]="!customerForm.form.valid">
+            <mat-icon>{{ isEditMode ? 'save' : 'add_circle' }}</mat-icon>
+            {{ isEditMode ? 'Salvar' : 'Criar' }}
+          </button>
+        </mat-card-actions>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

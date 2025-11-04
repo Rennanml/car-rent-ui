@@ -1,1 +1,52 @@
-<p>car-form works!</p>
+<div class="car-form-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ isEditMode ? 'Editar Carro' : 'Novo Carro' }}</mat-card-title>
+      <mat-card-subtitle>Preencha as informações do carro</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <form (ngSubmit)="onSubmit()" #carForm="ngForm">
+        
+        <mat-form-field appearance="outline" class="full-width-input">
+          <mat-label>Placa</mat-label>
+          <input matInput [(ngModel)]="car.licensePlate" name="licensePlate" required minlength="7" maxlength="7" 
+                 [disabled]="isEditMode">
+          <mat-error *ngIf="carForm.controls['licensePlate']?.invalid && carForm.controls['licensePlate']?.touched">
+            Placa é obrigatória (7 caracteres).
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width-input">
+          <mat-label>Marca</mat-label>
+          <input matInput [(ngModel)]="car.brand" name="brand" required>
+          <mat-error *ngIf="carForm.controls['brand']?.invalid && carForm.controls['brand']?.touched">
+            Marca é obrigatória.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width-input">
+          <mat-label>Modelo</mat-label>
+          <input matInput [(ngModel)]="car.model" name="model" required>
+          <mat-error *ngIf="carForm.controls['model']?.invalid && carForm.controls['model']?.touched">
+            Modelo é obrigatório.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width-input">
+          <mat-label>Preço Base (Diária)</mat-label>
+          <input matInput type="number" [(ngModel)]="car.basePrice" name="basePrice" required min="0.01" step="0.01">
+          <span matTextPrefix>R$&nbsp;</span> <mat-error *ngIf="carForm.controls['basePrice']?.invalid && carForm.controls['basePrice']?.touched">
+            Valor é obrigatório e deve ser positivo.
+          </mat-error>
+        </mat-form-field>
+        
+        <mat-card-actions align="end">
+          <button mat-button type="button" (click)="cancel()">Cancelar</button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="!carForm.form.valid">
+            {{ isEditMode ? 'Salvar Alterações' : 'Criar Carro' }}
+          </button>
+        </mat-card-actions>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

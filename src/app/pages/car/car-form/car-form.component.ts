@@ -57,7 +57,6 @@ export class CarFormComponent implements OnInit {
         this.car = data;
       },
       error: (err) => {
-        this.snackBar.open('Erro ao carregar carro.', 'Fechar', { duration: 3000 });
         this.router.navigate(['/cars']);
       }
     });
@@ -69,16 +68,14 @@ export class CarFormComponent implements OnInit {
         next: () => {
           this.snackBar.open('Carro atualizado com sucesso!', 'Fechar', { duration: 3000 });
           this.router.navigate(['/cars']);
-        },
-        error: (err) => this.snackBar.open('Erro ao atualizar carro.', 'Fechar', { duration: 3000 })
+        }
       });
     } else {
       this.carService.createCar(this.car).subscribe({
         next: () => {
           this.snackBar.open('Carro criado com sucesso!', 'Fechar', { duration: 3000 });
           this.router.navigate(['/cars']);
-        },
-        error: (err) => this.snackBar.open('Erro ao criar carro.', 'Fechar', { duration: 3000 })
+        }
       });
     }
   }

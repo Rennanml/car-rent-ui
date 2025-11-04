@@ -58,13 +58,6 @@ export class RegisterComponent {
         });
         
         this.router.navigate(['/login']); 
-      },
-      error: (err) => {
-        this.snackBar.open('Erro ao registrar. O email já pode estar em uso.', 'Fechar', {
-          duration: 3000,
-          panelClass: ['error-snackbar']
-        });
-        console.error('Erro no registro', err);
       }
     });
   }

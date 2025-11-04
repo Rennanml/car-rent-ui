@@ -104,10 +104,6 @@ export class RentalReturnComponent implements OnInit {
       next: () => {
         this.snackBar.open(`Devolução do aluguel #${this.rentalId} registrada com sucesso!`, 'Sucesso', { duration: 5000 });
         this.router.navigate(['/rentals']);
-      },
-      error: (error) => {
-        console.error('Erro ao registrar devolução:', error);
-        this.snackBar.open('Erro ao registrar devolução. Tente novamente.', 'Erro', { duration: 7000 });
       }
     });
   }

@@ -63,11 +63,8 @@ export class CustomerFormComponent implements OnInit {
         this.customer = data;
       },
       error: (err) => {
-        this.snackBar.open('Erro ao carregar cliente.', 'Fechar', {
-          duration: 3000,
-        });
         this.router.navigate(['/customers']);
-      },
+      }
     });
   }
 
@@ -78,16 +75,14 @@ export class CustomerFormComponent implements OnInit {
         next: () => {
           this.snackBar.open('Cliente atualizado com sucesso!', 'Fechar', { duration: 3000 });
           this.router.navigate(['/customers']);
-        },
-        error: (err) => this.snackBar.open('Erro ao atualizar carro.', 'Fechar', { duration: 3000 })
+        }
       });
     } else {
       this.customerService.createCustomer(this.customer).subscribe({
         next: () => {
           this.snackBar.open('Cliente criado com sucesso!', 'Fechar', { duration: 3000 });
           this.router.navigate(['/customers']);
-        },
-        error: (err) => this.snackBar.open('Erro ao criar cliente.', 'Fechar', { duration: 3000 })
+        }
       });
     }
   }

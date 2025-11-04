@@ -46,8 +46,7 @@ export class CustomerListComponent implements OnInit {
 
   loadCustomers(): void {
     this.customerService.getCustomers().subscribe({
-      next: (data) => this.customers = data,
-      error: (err) => this.snackBar.open('Erro ao carregar clientes.', 'Fechar', { duration: 3000 })
+      next: (data) => this.customers = data
     });
   }
 
@@ -70,8 +69,7 @@ export class CustomerListComponent implements OnInit {
           next: () => {
             this.snackBar.open('Cliente excluído com sucesso!', 'Fechar', { duration: 3000 });
             this.loadCustomers();
-          },
-          error: (err) => this.snackBar.open('Erro ao excluir cliente.', 'Fechar', { duration: 3000 })
+          }
         });
       }
     });

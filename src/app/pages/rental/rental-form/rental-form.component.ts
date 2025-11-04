@@ -84,7 +84,6 @@ export class RentalFormComponent {
         this.snackBar.open('Aluguel criado com sucesso!', 'Fechar', { duration: 3000 });
         this.router.navigate(['/rentals']);
       },
-      error: (err: any) => this.snackBar.open('Erro ao criar aluguel. Verifique os dados.', 'Fechar', { duration: 3000 })
     });
   }
 

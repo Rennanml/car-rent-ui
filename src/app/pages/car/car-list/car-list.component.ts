@@ -45,8 +45,7 @@ export class CarListComponent implements OnInit {
 
   loadCars(): void {
     this.carService.getCars().subscribe({
-      next: (data) => this.cars = data,
-      error: (err) => this.snackBar.open('Erro ao carregar carros.', 'Fechar', { duration: 3000 })
+      next: (data) => this.cars = data
     });
   }
 
@@ -69,8 +68,7 @@ export class CarListComponent implements OnInit {
           next: () => {
             this.snackBar.open('Carro excluído com sucesso!', 'Fechar', { duration: 3000 });
             this.loadCars();
-          },
-          error: (err) => this.snackBar.open('Erro ao excluir carro.', 'Fechar', { duration: 3000 })
+          }
         });
       }
     });

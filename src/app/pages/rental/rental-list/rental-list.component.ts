@@ -67,8 +67,7 @@ export class RentalListComponent implements OnInit {
 
   loadRentals(): void {
     this.rentalService.getRentals().subscribe({
-      next: (data) => this.rentals = data,
-      error: (err) => this.snackBar.open('Erro ao carregar alugueis.', 'Fechar', { duration: 3000 })
+      next: (data) => this.rentals = data
     });
   }
 
@@ -87,8 +86,7 @@ export class RentalListComponent implements OnInit {
           next: () => {
             this.snackBar.open('Aluguel excluído com sucesso!', 'Fechar', { duration: 3000 });
             this.loadRentals();
-          },
-          error: (err) => this.snackBar.open('Erro ao excluir aluguel.', 'Fechar', { duration: 3000 })
+          }
         });
       }
     });

@@ -6,6 +6,7 @@ export const ERROR_MESSAGES_MAP: { [key: string]: string } = {
   'The return date cannot be earlier than the rental start date.': 'A data de devolução não pode ser anterior à data de retirada.',
   'A car with this license plate already exists.': 'Já existe um carro cadastrado com esta placa. Verifique a placa e tente novamente.',
   'A customer with this CPF already exists.': 'Já existe um cliente cadastrado com este CPF. Utilize outro CPF ou verifique o cadastro existente.',
+  'Email already registered': 'Email já cadastrado. Utilize outro Email.',
   
   '400': 'Sua solicitação está incompleta ou inválida. Verifique os dados no formulário e tente novamente.',
   '401': 'Não autorizado. Sua sessão pode ter expirado. Por favor, faça login novamente.',
@@ -20,4 +21,5 @@ export const ERRORS_WITHOUT_DYNAMIC_VALUE: string[] = [
   'Invalid rental period: End date must be after start date.',
   'Invalid rental period: The interval cannot be longer than 60 days.',
   'The return date cannot be earlier than the rental start date.',
+  'Email already registered'
 ];
